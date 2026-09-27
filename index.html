@@ -1,0 +1,2438 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دولابك لدريم</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Tahoma,Arial,sans-serif;
+}
+
+:root{
+    --color1:#ffd600;
+    --color2:#ff3d00;
+    --dark:#171717;
+    --white:#fff;
+    --gray:#f3f3f3;
+    --border:#ddd;
+}
+
+body{
+    background:#f7f7f7;
+    color:#222;
+    min-height:100vh;
+}
+
+/* HEADER */
+header{
+    background:linear-gradient(135deg,var(--color1),var(--color2));
+    color:white;
+    padding:15px 20px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 3px 12px #0002;
+}
+
+.header-inner{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+}
+
+.logo-area img{
+    width:48px;
+    height:48px;
+    object-fit:cover;
+    border-radius:50%;
+    background:white;
+}
+
+.site-name{
+    font-size:22px;
+    font-weight:bold;
+}
+
+nav{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+nav button{
+    border:none;
+    background:#ffffff22;
+    color:white;
+    padding:10px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+nav button:hover{
+    background:#ffffff40;
+}
+
+/* SEARCH */
+.search-box{
+    max-width:1200px;
+    margin:20px auto;
+    padding:0 15px;
+}
+
+.search-box input{
+    width:100%;
+    padding:15px 20px;
+    border:1px solid var(--border);
+    border-radius:15px;
+    outline:none;
+    font-size:16px;
+    background:white;
+    box-shadow:0 2px 8px #0000000d;
+}
+
+.search-box input:focus{
+    border-color:var(--color2);
+}
+
+/* MAIN */
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:10px 15px 40px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-title{
+    font-size:28px;
+    margin:15px 0 20px;
+}
+
+/* LEAGUES */
+.leagues{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:20px;
+}
+
+.league-card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 4px 15px #00000012;
+    cursor:pointer;
+    transition:.25s;
+    border:1px solid #eee;
+}
+
+.league-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 25px #00000020;
+}
+
+.league-image{
+    width:100%;
+    height:170px;
+    object-fit:cover;
+    display:block;
+}
+
+.league-content{
+    padding:15px;
+}
+
+.league-content h3{
+    margin-bottom:8px;
+    font-size:20px;
+}
+
+.league-content p{
+    color:#777;
+    font-size:14px;
+}
+
+/* ITEMS */
+.back-btn{
+    border:none;
+    background:linear-gradient(135deg,var(--color1),var(--color2));
+    color:white;
+    padding:11px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.items{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:20px;
+}
+
+.item-card{
+    background:white;
+    border-radius:17px;
+    overflow:hidden;
+    box-shadow:0 4px 15px #00000012;
+    border:1px solid #eee;
+}
+
+.item-card img{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+}
+
+.item-body{
+    padding:15px;
+}
+
+.item-body h3{
+    font-size:19px;
+    margin-bottom:8px;
+}
+
+.item-body p{
+    color:#777;
+    font-size:14px;
+    line-height:1.7;
+}
+
+/* ABOUT */
+.about-box{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 4px 15px #00000010;
+    line-height:2;
+}
+
+.contact{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    margin-top:20px;
+}
+
+.contact a{
+    display:block;
+    background:#f7f7f7;
+    padding:15px;
+    border-radius:12px;
+    text-decoration:none;
+    color:#222;
+    font-weight:bold;
+}
+
+/* ADMIN LOGIN */
+.modal{
+    position:fixed;
+    inset:0;
+    background:#0008;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:3000;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    background:white;
+    width:100%;
+    max-width:500px;
+    border-radius:20px;
+    padding:25px;
+    max-height:90vh;
+    overflow-y:auto;
+}
+
+.modal-box h2{
+    margin-bottom:20px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:7px;
+    font-weight:bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+
+.form-group textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.btn{
+    border:none;
+    padding:11px 17px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    margin:3px;
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,var(--color1),var(--color2));
+    color:white;
+}
+
+.btn-dark{
+    background:#222;
+    color:white;
+}
+
+.btn-danger{
+    background:#d32f2f;
+    color:white;
+}
+
+.btn-gray{
+    background:#eee;
+    color:#222;
+}
+
+/* ADMIN */
+.admin-page{
+    display:none;
+}
+
+.admin-page.active{
+    display:block;
+}
+
+.admin-section{
+    background:white;
+    padding:20px;
+    border-radius:18px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px #00000010;
+}
+
+.admin-section h3{
+    margin-bottom:15px;
+}
+
+.admin-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.admin-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:12px;
+    background:#f7f7f7;
+    border-radius:12px;
+}
+
+.admin-info{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:0;
+}
+
+.admin-info img{
+    width:55px;
+    height:55px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.admin-info div{
+    overflow:hidden;
+}
+
+.admin-info strong{
+    display:block;
+}
+
+.admin-info small{
+    color:#777;
+}
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+}
+
+.color-preview{
+    height:50px;
+    border-radius:10px;
+    margin-top:8px;
+    background:linear-gradient(135deg,var(--color1),var(--color2));
+}
+
+/* IMAGE PREVIEW */
+.image-preview{
+    width:100%;
+    max-height:180px;
+    object-fit:cover;
+    border-radius:12px;
+    margin-top:8px;
+    display:none;
+}
+
+/* TOAST */
+.toast{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#222;
+    color:white;
+    padding:13px 18px;
+    border-radius:10px;
+    z-index:5000;
+    display:none;
+    box-shadow:0 4px 15px #0004;
+}
+
+.toast.show{
+    display:block;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:25px;
+    color:#777;
+}
+
+/* MOBILE */
+@media(max-width:700px){
+    .header-inner{
+        flex-direction:column;
+    }
+
+    nav{
+        justify-content:center;
+    }
+
+    .site-name{
+        font-size:19px;
+    }
+
+    .leagues,
+    .items{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .league-image{
+        height:130px;
+    }
+
+    .item-card img{
+        height:120px;
+    }
+
+    .league-content{
+        padding:10px;
+    }
+
+    .league-content h3{
+        font-size:16px;
+    }
+
+    .admin-row{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .actions{
+        justify-content:flex-start;
+    }
+}
+
+@media(max-width:420px){
+    .leagues,
+    .items{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+
+        <div class="logo-area" onclick="showPage('home')">
+            <img id="siteLogo" src="" alt="شعار">
+            <div class="site-name" id="siteName">دولابك لدريم</div>
+        </div>
+
+        <nav>
+            <button onclick="showPage('home')">الرئيسية</button>
+            <button onclick="showPage('about')">من نحن</button>
+            <button onclick="openAdmin()">لوحة التحكم</button>
+        </nav>
+
+    </div>
+</header>
+
+<!-- SEARCH -->
+<div class="search-box" id="searchContainer">
+    <input
+        type="search"
+        id="searchInput"
+        placeholder="ابحث داخل الموقع..."
+        oninput="searchSite()"
+    >
+</div>
+
+<div class="container">
+
+    <!-- HOME -->
+    <section id="homePage" class="page active">
+
+        <h1 class="page-title">الدوريات</h1>
+
+        <div id="leaguesContainer" class="leagues"></div>
+
+        <div id="emptyLeagues" style="display:none;text-align:center;padding:40px;color:#777;">
+            لا توجد دوريات مضافة حالياً.
+        </div>
+
+    </section>
+
+    <!-- LEAGUE CONTENT -->
+    <section id="leaguePage" class="page">
+
+        <button class="back-btn" onclick="showPage('home')">
+            ← العودة للدوريات
+        </button>
+
+        <h1 class="page-title" id="selectedLeagueTitle"></h1>
+
+        <div id="itemsContainer" class="items"></div>
+
+        <div id="emptyItems" style="display:none;text-align:center;padding:40px;color:#777;">
+            لا توجد خانات داخل هذا الدوري.
+        </div>
+
+    </section>
+
+    <!-- ABOUT -->
+    <section id="aboutPage" class="page">
+
+        <h1 class="page-title">من نحن</h1>
+
+        <div class="about-box">
+
+            <h2 id="aboutTitle">دولابك لدريم</h2>
+
+            <p id="aboutDescription">
+                مرحباً بكم في موقع دولابك لدريم.
+            </p>
+
+            <div class="contact">
+
+                <a id="phoneLink" href="#">
+                    📞 الهاتف:
+                    <span id="phoneText"></span>
+                </a>
+
+                <a id="telegramLink" href="#" target="_blank">
+                    ✈️ Telegram
+                </a>
+
+                <a id="privateLink" href="#" target="_blank">
+                    💬 التواصل الخاص
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ADMIN -->
+    <section id="adminPage" class="admin-page">
+
+        <h1 class="page-title">لوحة التحكم</h1>
+
+        <!-- SITE SETTINGS -->
+        <div class="admin-section">
+
+            <h3>إعدادات الموقع</h3>
+
+            <div class="form-group">
+                <label>اسم الموقع</label>
+                <input id="adminSiteName" type="text">
+            </div>
+
+            <div class="form-group">
+                <label>صورة الموقع / الشعار</label>
+                <input id="adminLogo" type="file" accept="image/*">
+                <img id="adminLogoPreview" class="image-preview">
+            </div>
+
+            <div class="form-group">
+                <label>اللون الأول</label>
+                <input id="color1" type="color">
+            </div>
+
+            <div class="form-group">
+                <label>اللون الثاني</label>
+                <input id="color2" type="color">
+            </div>
+
+            <div class="color-preview"></div>
+
+            <button class="btn btn-primary" onclick="saveSiteSettings()">
+                حفظ إعدادات الموقع
+            </button>
+
+        </div>
+
+        <!-- ADD LEAGUE -->
+        <div class="admin-section">
+
+            <h3>إضافة دوري جديد</h3>
+
+            <div class="form-group">
+                <label>اسم الدوري</label>
+                <input id="leagueName" type="text" placeholder="مثال: الدوري الإنجليزي">
+            </div>
+
+            <div class="form-group">
+                <label>وصف الدوري</label>
+                <textarea id="leagueDescription" placeholder="وصف مختصر للدوري"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>صورة الدوري</label>
+                <input id="leagueImage" type="file" accept="image/*">
+                <img id="leagueImagePreview" class="image-preview">
+            </div>
+
+            <button class="btn btn-primary" onclick="addLeague()">
+                + إضافة الدوري
+            </button>
+
+        </div>
+
+        <!-- LEAGUES MANAGEMENT -->
+        <div class="admin-section">
+
+            <h3>إدارة الدوريات</h3>
+
+            <div id="adminLeaguesList" class="admin-list"></div>
+
+        </div>
+
+        <!-- ADD ITEM -->
+        <div class="admin-section">
+
+            <h3>إضافة خانة داخل دوري</h3>
+
+            <div class="form-group">
+                <label>اختار الدوري</label>
+                <select id="itemLeagueSelect"></select>
+            </div>
+
+            <div class="form-group">
+                <label>اسم الخانة</label>
+                <input id="itemName" type="text" placeholder="مثال: القنوات الرياضية">
+            </div>
+
+            <div class="form-group">
+                <label>وصف الخانة</label>
+                <textarea id="itemDescription" placeholder="وصف محتوى الخانة"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>صورة الخانة</label>
+                <input id="itemImage" type="file" accept="image/*">
+                <img id="itemImagePreview" class="image-preview">
+            </div>
+
+            <button class="btn btn-primary" onclick="addItem()">
+                + إضافة الخانة
+            </button>
+
+        </div>
+
+        <!-- CONTACT -->
+        <div class="admin-section">
+
+            <h3>إعدادات من نحن والتواصل</h3>
+
+            <div class="form-group">
+                <label>العنوان</label>
+                <input id="aboutTitleInput" type="text">
+            </div>
+
+            <div class="form-group">
+                <label>الوصف</label>
+                <textarea id="aboutDescriptionInput"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>رقم الهاتف</label>
+                <input id="phoneInput" type="text">
+            </div>
+
+            <div class="form-group">
+                <label>رابط Telegram</label>
+                <input id="telegramInput" type="url" placeholder="https://t.me/...">
+            </div>
+
+            <div class="form-group">
+                <label>رابط التواصل الخاص</label>
+                <input id="privateInput" type="url" placeholder="https://...">
+            </div>
+
+            <button class="btn btn-primary" onclick="saveAbout()">
+                حفظ بيانات التواصل
+            </button>
+
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="admin-section">
+
+            <h3>تغيير رمز لوحة التحكم</h3>
+
+            <div class="form-group">
+                <label>الرمز الحالي</label>
+                <input id="oldPassword" type="password">
+            </div>
+
+            <div class="form-group">
+                <label>الرمز الجديد</label>
+                <input id="newPassword" type="password">
+            </div>
+
+            <div class="form-group">
+                <label>تأكيد الرمز الجديد</label>
+                <input id="confirmPassword" type="password">
+            </div>
+
+            <button class="btn btn-dark" onclick="changePassword()">
+                تغيير الرمز
+            </button>
+
+        </div>
+
+        <button class="btn btn-danger" onclick="logoutAdmin()">
+            تسجيل الخروج من لوحة التحكم
+        </button>
+
+    </section>
+
+</div>
+
+<footer>
+    <span id="footerName">دولابك لدريم</span>
+</footer>
+
+<!-- LOGIN MODAL -->
+<div class="modal" id="loginModal">
+
+    <div class="modal-box">
+
+        <h2>دخول لوحة التحكم</h2>
+
+        <div class="form-group">
+            <label>رمز الدخول</label>
+            <input
+                id="adminPassword"
+                type="password"
+                placeholder="أدخل الرمز"
+                onkeydown="if(event.key==='Enter') loginAdmin()"
+            >
+        </div>
+
+        <button class="btn btn-primary" onclick="loginAdmin()">
+            دخول
+        </button>
+
+        <button class="btn btn-gray" onclick="closeLogin()">
+            إلغاء
+        </button>
+
+    </div>
+
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal" id="editModal">
+
+    <div class="modal-box">
+
+        <h2 id="editModalTitle">تعديل</h2>
+
+        <div id="editModalContent"></div>
+
+        <button class="btn btn-primary" onclick="saveEdit()">
+            حفظ التعديل
+        </button>
+
+        <button class="btn btn-gray" onclick="closeEditModal()">
+            إلغاء
+        </button>
+
+    </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+/* =========================
+   DATABASE
+========================= */
+
+const DEFAULT_DATA = {
+
+    settings:{
+        siteName:"دولابك لدريم",
+        logo:"",
+        color1:"#ffd600",
+        color2:"#ff3d00"
+    },
+
+    about:{
+        title:"دولابك لدريم",
+        description:"مرحباً بكم في موقع دولابك لدريم.",
+        phone:"",
+        telegram:"",
+        privateLink:""
+    },
+
+    password:"1234",
+
+    leagues:[]
+
+};
+
+let data = JSON.parse(
+    localStorage.getItem("dolabakData")
+) || DEFAULT_DATA;
+
+let selectedLeagueId = null;
+
+let editingType = null;
+let editingId = null;
+
+
+/* =========================
+   SAVE
+========================= */
+
+function saveData(){
+
+    localStorage.setItem(
+        "dolabakData",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function toast(message){
+
+    const t = document.getElementById("toast");
+
+    t.textContent = message;
+
+    t.classList.add("show");
+
+    setTimeout(()=>{
+        t.classList.remove("show");
+    },2500);
+
+}
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+function init(){
+
+    applySettings();
+
+    renderLeagues();
+
+    renderAbout();
+
+    populateLeagueSelect();
+
+    loadAdminSettings();
+
+}
+
+init();
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+function applySettings(){
+
+    document.documentElement.style.setProperty(
+        "--color1",
+        data.settings.color1
+    );
+
+    document.documentElement.style.setProperty(
+        "--color2",
+        data.settings.color2
+    );
+
+    document.getElementById("siteName").textContent =
+        data.settings.siteName;
+
+    document.getElementById("footerName").textContent =
+        data.settings.siteName;
+
+    const logo =
+        document.getElementById("siteLogo");
+
+    if(data.settings.logo){
+
+        logo.src = data.settings.logo;
+
+    }else{
+
+        logo.style.display = "none";
+
+    }
+
+}
+
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+function hideAllPages(){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(p=>p.classList.remove("active"));
+
+    document
+        .getElementById("adminPage")
+        .classList.remove("active");
+
+}
+
+
+function showPage(page){
+
+    hideAllPages();
+
+    document
+        .getElementById("searchInput")
+        .value = "";
+
+    if(page==="home"){
+
+        document
+            .getElementById("homePage")
+            .classList.add("active");
+
+        renderLeagues();
+
+    }
+
+    if(page==="about"){
+
+        document
+            .getElementById("aboutPage")
+            .classList.add("active");
+
+    }
+
+}
+
+
+/* =========================
+   LEAGUES
+========================= */
+
+function renderLeagues(){
+
+    const container =
+        document.getElementById("leaguesContainer");
+
+    const empty =
+        document.getElementById("emptyLeagues");
+
+    container.innerHTML = "";
+
+    if(data.leagues.length===0){
+
+        empty.style.display = "block";
+
+        return;
+
+    }
+
+    empty.style.display = "none";
+
+    data.leagues.forEach(league=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className = "league-card";
+
+        card.onclick = ()=>{
+            openLeague(league.id);
+        };
+
+        const image =
+            league.image ||
+            "https://via.placeholder.com/600x400?text=League";
+
+        card.innerHTML = `
+            <img class="league-image" src="${image}">
+            <div class="league-content">
+                <h3>${escapeHTML(league.name)}</h3>
+                <p>${escapeHTML(league.description || "")}</p>
+            </div>
+        `;
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================
+   OPEN LEAGUE
+========================= */
+
+function openLeague(id){
+
+    const league =
+        data.leagues.find(x=>x.id===id);
+
+    if(!league) return;
+
+    selectedLeagueId = id;
+
+    hideAllPages();
+
+    document
+        .getElementById("leaguePage")
+        .classList.add("active");
+
+    document
+        .getElementById("selectedLeagueTitle")
+        .textContent = league.name;
+
+    renderItems(league);
+
+}
+
+
+/* =========================
+   ITEMS
+========================= */
+
+function renderItems(league){
+
+    const container =
+        document.getElementById("itemsContainer");
+
+    const empty =
+        document.getElementById("emptyItems");
+
+    container.innerHTML = "";
+
+    if(!league.items || league.items.length===0){
+
+        empty.style.display = "block";
+
+        return;
+
+    }
+
+    empty.style.display = "none";
+
+    league.items.forEach(item=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className = "item-card";
+
+        const image =
+            item.image ||
+            "https://via.placeholder.com/600x400?text=Item";
+
+        card.innerHTML = `
+            <img src="${image}">
+            <div class="item-body">
+                <h3>${escapeHTML(item.name)}</h3>
+                <p>${escapeHTML(item.description || "")}</p>
+            </div>
+        `;
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================
+   ADD LEAGUE
+========================= */
+
+async function addLeague(){
+
+    const name =
+        document.getElementById("leagueName").value.trim();
+
+    const description =
+        document.getElementById("leagueDescription").value.trim();
+
+    const file =
+        document.getElementById("leagueImage").files[0];
+
+    if(!name){
+
+        toast("اكتب اسم الدوري أولاً");
+
+        return;
+
+    }
+
+    let image = "";
+
+    if(file){
+
+        image = await fileToBase64(file);
+
+    }
+
+    data.leagues.push({
+
+        id:Date.now().toString(),
+
+        name:name,
+
+        description:description,
+
+        image:image,
+
+        items:[]
+
+    });
+
+    saveData();
+
+    document.getElementById("leagueName").value = "";
+    document.getElementById("leagueDescription").value = "";
+    document.getElementById("leagueImage").value = "";
+
+    document.getElementById("leagueImagePreview").style.display = "none";
+
+    renderLeagues();
+
+    populateLeagueSelect();
+
+    renderAdminLeagues();
+
+    toast("تمت إضافة الدوري بنجاح");
+
+}
+
+
+/* =========================
+   ADMIN LEAGUES
+========================= */
+
+function renderAdminLeagues(){
+
+    const list =
+        document.getElementById("adminLeaguesList");
+
+    list.innerHTML = "";
+
+    if(data.leagues.length===0){
+
+        list.innerHTML =
+            "<p style='color:#777'>لا توجد دوريات.</p>";
+
+        return;
+
+    }
+
+    data.leagues.forEach(league=>{
+
+        const row =
+            document.createElement("div");
+
+        row.className = "admin-row";
+
+        row.innerHTML = `
+
+            <div class="admin-info">
+
+                <img src="${
+                    league.image ||
+                    "https://via.placeholder.com/100"
+                }">
+
+                <div>
+                    <strong>${escapeHTML(league.name)}</strong>
+                    <small>
+                        ${league.items.length} خانة
+                    </small>
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="editLeague('${league.id}')">
+                    تعديل
+                </button>
+
+                <button
+                    class="btn btn-dark"
+                    onclick="openItemsManager('${league.id}')">
+                    الخانات
+                </button>
+
+                <button
+                    class="btn btn-danger"
+                    onclick="deleteLeague('${league.id}')">
+                    حذف
+                </button>
+
+            </div>
+        `;
+
+        list.appendChild(row);
+
+    });
+
+}
+
+
+/* =========================
+   DELETE LEAGUE
+========================= */
+
+function deleteLeague(id){
+
+    const league =
+        data.leagues.find(x=>x.id===id);
+
+    if(!league) return;
+
+    if(!confirm(
+        "هل أنت متأكد من حذف الدوري وكل الخانات الموجودة بداخله؟"
+    )) return;
+
+    data.leagues =
+        data.leagues.filter(x=>x.id!==id);
+
+    saveData();
+
+    renderLeagues();
+
+    renderAdminLeagues();
+
+    populateLeagueSelect();
+
+    toast("تم حذف الدوري");
+
+}
+
+
+/* =========================
+   EDIT LEAGUE
+========================= */
+
+function editLeague(id){
+
+    const league =
+        data.leagues.find(x=>x.id===id);
+
+    if(!league) return;
+
+    editingType = "league";
+    editingId = id;
+
+    document.getElementById("editModalTitle")
+        .textContent = "تعديل الدوري";
+
+    document.getElementById("editModalContent").innerHTML = `
+
+        <div class="form-group">
+            <label>اسم الدوري</label>
+            <input id="editName" value="${escapeAttribute(league.name)}">
+        </div>
+
+        <div class="form-group">
+            <label>وصف الدوري</label>
+            <textarea id="editDescription">${escapeHTML(league.description || "")}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label>صورة جديدة - اختياري</label>
+            <input id="editImage" type="file" accept="image/*">
+        </div>
+
+    `;
+
+    document.getElementById("editModal")
+        .classList.add("show");
+
+}
+
+
+/* =========================
+   SAVE EDIT
+========================= */
+
+async function saveEdit(){
+
+    if(editingType==="league"){
+
+        const league =
+            data.leagues.find(x=>x.id===editingId);
+
+        if(!league) return;
+
+        const name =
+            document.getElementById("editName")
+            .value.trim();
+
+        const description =
+            document.getElementById("editDescription")
+            .value.trim();
+
+        const file =
+            document.getElementById("editImage").files[0];
+
+        if(!name){
+
+            toast("اسم الدوري مطلوب");
+
+            return;
+
+        }
+
+        league.name = name;
+
+        league.description = description;
+
+        if(file){
+
+            league.image =
+                await fileToBase64(file);
+
+        }
+
+        saveData();
+
+        renderLeagues();
+
+        renderAdminLeagues();
+
+        populateLeagueSelect();
+
+        closeEditModal();
+
+        toast("تم تعديل الدوري");
+
+    }
+
+}
+
+
+/* =========================
+   ITEMS MANAGER
+========================= */
+
+function openItemsManager(leagueId){
+
+    const league =
+        data.leagues.find(x=>x.id===leagueId);
+
+    if(!league) return;
+
+    editingType = "itemsManager";
+
+    document.getElementById("editModalTitle")
+        .textContent =
+        "خانات: " + league.name;
+
+    let html = `
+
+        <div style="margin-bottom:15px">
+            <button
+                class="btn btn-primary"
+                onclick="prepareAddItem('${league.id}')">
+                + إضافة خانة لهذا الدوري
+            </button>
+        </div>
+    `;
+
+    if(league.items.length===0){
+
+        html +=
+            "<p style='color:#777'>لا توجد خانات داخل هذا الدوري.</p>";
+
+    }
+
+    league.items.forEach(item=>{
+
+        html += `
+
+            <div class="admin-row">
+
+                <div class="admin-info">
+
+                    <img src="${
+                        item.image ||
+                        "https://via.placeholder.com/100"
+                    }">
+
+                    <div>
+                        <strong>
+                            ${escapeHTML(item.name)}
+                        </strong>
+                        <small>
+                            ${escapeHTML(item.description || "")}
+                        </small>
+                    </div>
+
+                </div>
+
+                <div class="actions">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="editItem('${league.id}','${item.id}')">
+                        تعديل
+                    </button>
+
+                    <button
+                        class="btn btn-danger"
+                        onclick="deleteItem('${league.id}','${item.id}')">
+                        حذف
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+    document.getElementById("editModalContent")
+        .innerHTML = html;
+
+    document.getElementById("editModal")
+        .classList.add("show");
+
+}
+
+
+/* =========================
+   PREPARE ADD ITEM
+========================= */
+
+function prepareAddItem(leagueId){
+
+    closeEditModal();
+
+    document.getElementById("itemLeagueSelect")
+        .value = leagueId;
+
+    document.getElementById("itemName")
+        .focus();
+
+}
+
+
+/* =========================
+   ADD ITEM
+========================= */
+
+async function addItem(){
+
+    const leagueId =
+        document.getElementById("itemLeagueSelect").value;
+
+    const league =
+        data.leagues.find(x=>x.id===leagueId);
+
+    if(!league){
+
+        toast("اختار الدوري أولاً");
+
+        return;
+
+    }
+
+    const name =
+        document.getElementById("itemName")
+        .value.trim();
+
+    const description =
+        document.getElementById("itemDescription")
+        .value.trim();
+
+    const file =
+        document.getElementById("itemImage").files[0];
+
+    if(!name){
+
+        toast("اكتب اسم الخانة");
+
+        return;
+
+    }
+
+    let image = "";
+
+    if(file){
+
+        image =
+            await fileToBase64(file);
+
+    }
+
+    league.items.push({
+
+        id:Date.now().toString(),
+
+        name:name,
+
+        description:description,
+
+        image:image
+
+    });
+
+    saveData();
+
+    document.getElementById("itemName").value = "";
+
+    document.getElementById("itemDescription").value = "";
+
+    document.getElementById("itemImage").value = "";
+
+    document.getElementById("itemImagePreview").style.display = "none";
+
+    renderAdminLeagues();
+
+    toast("تمت إضافة الخانة");
+
+}
+
+
+/* =========================
+   EDIT ITEM
+========================= */
+
+function editItem(leagueId,itemId){
+
+    const league =
+        data.leagues.find(x=>x.id===leagueId);
+
+    if(!league) return;
+
+    const item =
+        league.items.find(x=>x.id===itemId);
+
+    if(!item) return;
+
+    editingType = "item";
+
+    editingId = itemId;
+
+    document.getElementById("editModalTitle")
+        .textContent = "تعديل الخانة";
+
+    document.getElementById("editModalContent").innerHTML = `
+
+        <div class="form-group">
+            <label>اسم الخانة</label>
+            <input
+                id="editItemName"
+                value="${escapeAttribute(item.name)}">
+        </div>
+
+        <div class="form-group">
+            <label>الوصف</label>
+            <textarea id="editItemDescription">${escapeHTML(item.description || "")}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label>صورة جديدة - اختياري</label>
+            <input id="editItemImage" type="file" accept="image/*">
+        </div>
+
+        <input
+            type="hidden"
+            id="editItemLeague"
+            value="${leagueId}"
+        >
+    `;
+
+    document.getElementById("editModal")
+        .classList.add("show");
+
+}
+
+
+/* =========================
+   SAVE ITEM EDIT
+========================= */
+
+async function saveItemEdit(){
+
+    const leagueId =
+        document.getElementById("editItemLeague").value;
+
+    const league =
+        data.leagues.find(x=>x.id===leagueId);
+
+    if(!league) return;
+
+    const item =
+        league.items.find(x=>x.id===editingId);
+
+    if(!item) return;
+
+    const name =
+        document.getElementById("editItemName")
+        .value.trim();
+
+    const description =
+        document.getElementById("editItemDescription")
+        .value.trim();
+
+    const file =
+        document.getElementById("editItemImage").files[0];
+
+    if(!name){
+
+        toast("اسم الخانة مطلوب");
+
+        return;
+
+    }
+
+    item.name = name;
+
+    item.description = description;
+
+    if(file){
+
+        item.image =
+            await fileToBase64(file);
+
+    }
+
+    saveData();
+
+    closeEditModal();
+
+    renderAdminLeagues();
+
+    if(selectedLeagueId===leagueId){
+
+        renderItems(league);
+
+    }
+
+    toast("تم تعديل الخانة");
+
+}
+
+
+/* =========================
+   DELETE ITEM
+========================= */
+
+function deleteItem(leagueId,itemId){
+
+    const league =
+        data.leagues.find(x=>x.id===leagueId);
+
+    if(!league) return;
+
+    if(!confirm("هل تريد حذف هذه الخانة؟")) return;
+
+    league.items =
+        league.items.filter(x=>x.id!==itemId);
+
+    saveData();
+
+    openItemsManager(leagueId);
+
+    if(selectedLeagueId===leagueId){
+
+        renderItems(league);
+
+    }
+
+    toast("تم حذف الخانة");
+
+}
+
+
+/* =========================
+   CLOSE EDIT
+========================= */
+
+function closeEditModal(){
+
+    document
+        .getElementById("editModal")
+        .classList.remove("show");
+
+    editingType = null;
+
+    editingId = null;
+
+}
+
+
+/* =========================
+   OVERRIDE SAVE EDIT
+========================= */
+
+const originalSaveEdit = saveEdit;
+
+saveEdit = async function(){
+
+    if(editingType==="item"){
+
+        await saveItemEdit();
+
+        return;
+
+    }
+
+    await originalSaveEdit();
+
+};
+
+
+/* =========================
+   SELECT LEAGUES
+========================= */
+
+function populateLeagueSelect(){
+
+    const select =
+        document.getElementById("itemLeagueSelect");
+
+    select.innerHTML =
+        `<option value="">-- اختار الدوري --</option>`;
+
+    data.leagues.forEach(league=>{
+
+        const option =
+            document.createElement("option");
+
+        option.value = league.id;
+
+        option.textContent = league.name;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+function renderAbout(){
+
+    document.getElementById("aboutTitle")
+        .textContent = data.about.title;
+
+    document.getElementById("aboutDescription")
+        .textContent = data.about.description;
+
+    document.getElementById("phoneText")
+        .textContent = data.about.phone || "غير متوفر";
+
+    const phone =
+        document.getElementById("phoneLink");
+
+    if(data.about.phone){
+
+        phone.href =
+            "tel:" + data.about.phone;
+
+    }else{
+
+        phone.href = "#";
+
+    }
+
+    const telegram =
+        document.getElementById("telegramLink");
+
+    telegram.href =
+        data.about.telegram || "#";
+
+    const privateLink =
+        document.getElementById("privateLink");
+
+    privateLink.href =
+        data.about.privateLink || "#";
+
+}
+
+
+/* =========================
+   SAVE ABOUT
+========================= */
+
+function saveAbout(){
+
+    data.about.title =
+        document.getElementById("aboutTitleInput")
+        .value.trim();
+
+    data.about.description =
+        document.getElementById("aboutDescriptionInput")
+        .value.trim();
+
+    data.about.phone =
+        document.getElementById("phoneInput")
+        .value.trim();
+
+    data.about.telegram =
+        document.getElementById("telegramInput")
+        .value.trim();
+
+    data.about.privateLink =
+        document.getElementById("privateInput")
+        .value.trim();
+
+    saveData();
+
+    renderAbout();
+
+    toast("تم حفظ بيانات التواصل");
+
+}
+
+
+/* =========================
+   ADMIN SETTINGS
+========================= */
+
+function loadAdminSettings(){
+
+    document.getElementById("adminSiteName")
+        .value = data.settings.siteName;
+
+    document.getElementById("color1")
+        .value = data.settings.color1;
+
+    document.getElementById("color2")
+        .value = data.settings.color2;
+
+    if(data.settings.logo){
+
+        document.getElementById("adminLogoPreview").src =
+            data.settings.logo;
+
+        document.getElementById("adminLogoPreview")
+            .style.display = "block";
+
+    }
+
+    document.getElementById("aboutTitleInput")
+        .value = data.about.title;
+
+    document.getElementById("aboutDescriptionInput")
+        .value = data.about.description;
+
+    document.getElementById("phoneInput")
+        .value = data.about.phone;
+
+    document.getElementById("telegramInput")
+        .value = data.about.telegram;
+
+    document.getElementById("privateInput")
+        .value = data.about.privateLink;
+
+    renderAdminLeagues();
+
+}
+
+
+/* =========================
+   SAVE SITE SETTINGS
+========================= */
+
+async function saveSiteSettings(){
+
+    const name =
+        document.getElementById("adminSiteName")
+        .value.trim();
+
+    const logoFile =
+        document.getElementById("adminLogo").files[0];
+
+    if(name){
+
+        data.settings.siteName = name;
+
+    }
+
+    data.settings.color1 =
+        document.getElementById("color1").value;
+
+    data.settings.color2 =
+        document.getElementById("color2").value;
+
+    if(logoFile){
+
+        data.settings.logo =
+            await fileToBase64(logoFile);
+
+    }
+
+    saveData();
+
+    applySettings();
+
+    loadAdminSettings();
+
+    toast("تم حفظ إعدادات الموقع");
+
+}
+
+
+/* =========================
+   PASSWORD
+========================= */
+
+function changePassword(){
+
+    const oldPassword =
+        document.getElementById("oldPassword").value;
+
+    const newPassword =
+        document.getElementById("newPassword").value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+    if(oldPassword!==data.password){
+
+        toast("رمز الدخول الحالي غير صحيح");
+
+        return;
+
+    }
+
+    if(!newPassword){
+
+        toast("اكتب الرمز الجديد");
+
+        return;
+
+    }
+
+    if(newPassword!==confirmPassword){
+
+        toast("تأكيد الرمز غير مطابق");
+
+        return;
+
+    }
+
+    data.password = newPassword;
+
+    saveData();
+
+    document.getElementById("oldPassword").value = "";
+    document.getElementById("newPassword").value = "";
+    document.getElementById("confirmPassword").value = "";
+
+    toast("تم تغيير رمز لوحة التحكم");
+
+}
+
+
+/* =========================
+   ADMIN LOGIN
+========================= */
+
+function openAdmin(){
+
+    if(sessionStorage.getItem("adminLogged")==="true"){
+
+        openAdminPage();
+
+        return;
+
+    }
+
+    document
+        .getElementById("loginModal")
+        .classList.add("show");
+
+    document
+        .getElementById("adminPassword")
+        .focus();
+
+}
+
+
+function closeLogin(){
+
+    document
+        .getElementById("loginModal")
+        .classList.remove("show");
+
+}
+
+
+function loginAdmin(){
+
+    const password =
+        document.getElementById("adminPassword").value;
+
+    if(password===data.password){
+
+        sessionStorage.setItem(
+            "adminLogged",
+            "true"
+        );
+
+        document.getElementById("adminPassword").value = "";
+
+        closeLogin();
+
+        openAdminPage();
+
+        toast("تم تسجيل الدخول");
+
+    }else{
+
+        toast("رمز الدخول غير صحيح");
+
+    }
+
+}
+
+
+function openAdminPage(){
+
+    hideAllPages();
+
+    document
+        .getElementById("adminPage")
+        .classList.add("active");
+
+    document
+        .getElementById("searchContainer")
+        .style.display = "none";
+
+    loadAdminSettings();
+
+}
+
+
+function logoutAdmin(){
+
+    sessionStorage.removeItem("adminLogged");
+
+    showPage("home");
+
+    document
+        .getElementById("searchContainer")
+        .style.display = "block";
+
+    toast("تم تسجيل الخروج");
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchSite(){
+
+    const query =
+        document.getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+    if(!query){
+
+        renderLeagues();
+
+        return;
+
+    }
+
+    hideAllPages();
+
+    document
+        .getElementById("homePage")
+        .classList.add("active");
+
+    const container =
+        document.getElementById("leaguesContainer");
+
+    const empty =
+        document.getElementById("emptyLeagues");
+
+    container.innerHTML = "";
+
+    let results = [];
+
+    data.leagues.forEach(league=>{
+
+        const leagueMatch =
+            league.name.toLowerCase().includes(query) ||
+            (league.description || "")
+                .toLowerCase()
+                .includes(query);
+
+        if(leagueMatch){
+
+            results.push({
+                type:"league",
+                league:league
+            });
+
+        }
+
+        league.items.forEach(item=>{
+
+            if(
+                item.name.toLowerCase().includes(query) ||
+                (item.description || "")
+                    .toLowerCase()
+                    .includes(query)
+            ){
+
+                results.push({
+                    type:"item",
+                    league:league,
+                    item:item
+                });
+
+            }
+
+        });
+
+    });
+
+    if(results.length===0){
+
+        empty.style.display = "block";
+
+        empty.textContent =
+            "لا توجد نتائج للبحث.";
+
+        return;
+
+    }
+
+    empty.style.display = "none";
+
+    results.forEach(result=>{
+
+        if(result.type==="league"){
+
+            const card =
+                document.createElement("div");
+
+            card.className = "league-card";
+
+            card.onclick = ()=>{
+                openLeague(result.league.id);
+            };
+
+            card.innerHTML = `
+
+                <img class="league-image"
+                     src="${
+                        result.league.image ||
+                        "https://via.placeholder.com/600x400?text=League"
+                     }">
+
+                <div class="league-content">
+
+                    <h3>
+                        ${escapeHTML(result.league.name)}
+                    </h3>
+
+                    <p>
+                        ${escapeHTML(result.league.description || "")}
+                    </p>
+
+                </div>
+            `;
+
+            container.appendChild(card);
+
+        }
+
+        if(result.type==="item"){
+
+            const card =
+                document.createElement("div");
+
+            card.className = "league-card";
+
+            card.onclick = ()=>{
+                openLeague(result.league.id);
+            };
+
+            card.innerHTML = `
+
+                <img class="league-image"
+                     src="${
+                        result.item.image ||
+                        "https://via.placeholder.com/600x400?text=Item"
+                     }">
+
+                <div class="league-content">
+
+                    <h3>
+                        ${escapeHTML(result.item.name)}
+                    </h3>
+
+                    <p>
+                        داخل: ${escapeHTML(result.league.name)}
+                    </p>
+
+                </div>
+            `;
+
+            container.appendChild(card);
+
+        }
+
+    });
+
+}
+
+
+/* =========================
+   IMAGE TO BASE64
+========================= */
+
+function fileToBase64(file){
+
+    return new Promise((resolve,reject)=>{
+
+        const reader =
+            new FileReader();
+
+        reader.onload = ()=>{
+            resolve(reader.result);
+        };
+
+        reader.onerror = reject;
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+
+
+/* =========================
+   IMAGE PREVIEWS
+========================= */
+
+document.getElementById("leagueImage")
+.addEventListener("change",function(){
+
+    previewFile(
+        this,
+        "leagueImagePreview"
+    );
+
+});
+
+
+document.getElementById("itemImage")
+.addEventListener("change",function(){
+
+    previewFile(
+        this,
+        "itemImagePreview"
+    );
+
+});
+
+
+document.getElementById("adminLogo")
+.addEventListener("change",function(){
+
+    previewFile(
+        this,
+        "adminLogoPreview"
+    );
+
+});
+
+
+function previewFile(input,previewId){
+
+    const file = input.files[0];
+
+    const preview =
+        document.getElementById(previewId);
+
+    if(!file){
+
+        preview.style.display = "none";
+
+        return;
+
+    }
+
+    const reader =
+        new FileReader();
+
+    reader.onload = function(e){
+
+        preview.src = e.target.result;
+
+        preview.style.display = "block";
+
+    };
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(text){
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        text ?? "";
+
+    return div.innerHTML;
+
+}
+
+
+function escapeAttribute(text){
+
+    return escapeHTML(text)
+        .replace(/"/g,"&quot;");
+
+}
+
+
+/* =========================
+   ADMIN PAGE OBSERVER
+========================= */
+
+const observer =
+    new MutationObserver(()=>{
+
+        const admin =
+            document
+            .getElementById("adminPage")
+            .classList
+            .contains("active");
+
+        document
+            .getElementById("searchContainer")
+            .style.display =
+            admin ? "none" : "block";
+
+    });
+
+observer.observe(
+    document.getElementById("adminPage"),
+    {
+        attributes:true
+    }
+);
+
+</script>
+
+</body>
+</html>
